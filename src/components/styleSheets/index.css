@@ -1,15 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 * {
-    box-sizing: border-box;
-  }
-  
-  html {
-    font-family: Helvetica, sans-serif;
-  }
-  
-  a {
-    text-decoration: none;
-  }
-  
-  button {
-    cursor: pointer;
-  }
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Inter', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+body {
+  font-size: 14px;
+}
