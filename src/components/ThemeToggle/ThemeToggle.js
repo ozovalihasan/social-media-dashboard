@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-// import * as color from '../styleVariables';
+import { MyContext } from '../store';
 
-const ThemeToggle = ({ setTheme, themeName }) => {
+const ThemeToggle = () => {
+  const { themeName, setTheme } = useContext(MyContext);
+
   const handleClick = () => {
     if (localStorage.theme === 'dark') {
       localStorage.theme = 'light';
@@ -15,16 +16,28 @@ const ThemeToggle = ({ setTheme, themeName }) => {
   };
   return (
 
-    <div>
+    <ToggleContainer>
+      <div>
+        Dark Mode
+      </div>
       <div>
         <ThemeButton type="button" name="toggle-theme" onClick={handleClick} aria-label="toggle-theme">
-          <Span theme-name={themeName} />
+          <Slider theme-name={themeName} />
         </ThemeButton>
       </div>
-    </div>
+    </ToggleContainer>
   );
 };
+const ToggleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: ${props => props.theme.text_first};
 
+  @media screen and (min-width: 768px) {
+    justify-content: center;
+  }
+`;
 const ThemeButton = styled.button`
   margin: 10px;
   width: 50px;
@@ -37,17 +50,13 @@ const ThemeButton = styled.button`
   outline: none;
 `;
 
-const Span = styled.div`
+const Slider = styled.div`
   width: 15px;
   height: 15px;
-  background: ${props => props.theme.twitter};
-  transform: translateX(${props => (props['theme-name'] === 'dark' ? '10px' : '-10px')});
+  background: ${props => props.theme.toggle_slider};
+  transform: translateX(${props => (props['theme-name'] === 'dark' ? '-10px' : '10px')});
   border-radius: 15px;
   transition: all 0.3s ease-out;
 `;
 
-ThemeToggle.propTypes = {
-  setTheme: PropTypes.func.isRequired,
-  themeName: PropTypes.string.isRequired,
-};
 export default ThemeToggle;
